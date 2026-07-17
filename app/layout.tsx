@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -45,7 +46,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Reading the nonce here is required for Next.js to thread it into the
+  // script tags it renders for RSC hydration — without this call, the
+  // middleware-issued CSP nonce is never applied and every inline/bootstrap
+  // script is blocked. See middleware.ts for where the nonce originates.
+  await headers();
+
   return (
     <html lang="de" className={`${inter.variable} ${fraunces.variable}`}>
       <body>

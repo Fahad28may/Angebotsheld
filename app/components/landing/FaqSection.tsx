@@ -27,8 +27,13 @@ export function FaqSection({ items, title = "Häufige Fragen" }: { items: FaqIte
 
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-      {/* eslint-disable-next-line react/no-danger */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {/* JSON.stringify output is escaped to prevent a `</script>`-style
+          sequence in any question/answer text from breaking out of this
+          script tag. eslint-disable-next-line react/no-danger */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <Reveal>
         <h2 className="font-serif text-3xl text-ink">{title}</h2>
       </Reveal>
