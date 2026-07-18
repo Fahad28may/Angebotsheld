@@ -10,10 +10,13 @@ export function middleware(request: NextRequest) {
 
   // Umami Cloud (cookie-free analytics, see components/Analytics.tsx) is only
   // allowlisted when it's actually configured, so the CSP stays maximally
-  // strict when NEXT_PUBLIC_UMAMI_WEBSITE_ID is unset.
+  // strict when NEXT_PUBLIC_UMAMI_WEBSITE_ID is unset. The script itself
+  // loads from cloud.umami.is, but the script sends tracking beacons to a
+  // separate collector host, gateway.umami.is — both must be allowlisted or
+  // every event gets silently dropped by the browser's CSP enforcement.
   const umamiEnabled = Boolean(process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID);
   const umamiScript = umamiEnabled ? " https://cloud.umami.is" : "";
-  const umamiConnect = umamiEnabled ? " https://cloud.umami.is" : "";
+  const umamiConnect = umamiEnabled ? " https://cloud.umami.is https://gateway.umami.is" : "";
 
   const csp = [
     "default-src 'self'",
