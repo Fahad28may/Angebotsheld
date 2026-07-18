@@ -48,7 +48,7 @@ const faqItems = [
   {
     question: "Sind meine Daten sicher?",
     answer:
-      "Alle Berechnungen laufen in Ihrem Browser – Ihre Angebotsdaten werden nie an unsere Server übertragen. Es werden keine Cookies gesetzt. Wir nutzen lediglich anonyme, cookie-freie Nutzungsstatistiken (Plausible), die keine Rückschlüsse auf einzelne Personen zulassen. Details finden Sie auf unserer Datenschutz-Seite.",
+      "Alle Berechnungen laufen in Ihrem Browser – Ihre Angebotsdaten werden nie an unsere Server übertragen. Es werden keine Cookies gesetzt. Wir nutzen lediglich anonyme, cookie-freie Nutzungsstatistiken (Umami), die keine Rückschlüsse auf einzelne Personen zulassen. Details finden Sie auf unserer Datenschutz-Seite.",
   },
 ];
 

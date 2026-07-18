@@ -74,34 +74,35 @@ export default function DatenschutzPage() {
       </section>
 
       <section className="mt-8">
-        <h2 className="font-serif text-xl text-ink">4. Anonyme Nutzungsstatistiken (Plausible)</h2>
-        {/* REVIEW: Bitte prüfen, ob mit dem konkret gewählten Plausible-Hosting (plausible.io Cloud
-            vs. selbst gehostet) noch ein Auftragsverarbeitungsvertrag (AVV) abzuschließen ist, und ob
+        <h2 className="font-serif text-xl text-ink">4. Anonyme Nutzungsstatistiken (Umami)</h2>
+        {/* REVIEW: Bitte prüfen, ob mit dem konkret gewählten Umami-Hosting (Umami Cloud, Betreiber
+            Umami Software Inc.) noch ein Auftragsverarbeitungsvertrag (AVV) abzuschließen ist, und ob
             die Formulierung zur berechtigten Interessen-Abwägung (Art. 6 Abs. 1 lit. f DSGVO) trägt. */}
         <p className="mt-3 text-ink-soft">
           Um zu verstehen, welche Seiten und Funktionen genutzt werden, setzen wir den
-          Webanalyse-Dienst Plausible Analytics ein. Plausible verzichtet vollständig auf Cookies und
-          jegliche Form von Fingerprinting, erhebt keine personenbezogenen Daten und ermöglicht keine
-          Nachverfolgung einzelner Personen über Websites hinweg. Erfasst werden ausschließlich
-          aggregierte, anonyme Kennzahlen wie aufgerufene Seiten, ungefähre Herkunft (Land, auf Basis
-          der IP-Adresse, die nicht gespeichert wird) und ausgelöste Ereignisse (z. B. „PDF
-          heruntergeladen"). Eine Zuordnung zu Ihrer Person ist nicht möglich. Die Datenverarbeitung
-          erfolgt auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) an einer
-          bedarfsgerechten Gestaltung unserer Website. Weil keine Cookies gesetzt und keine
-          personenbezogenen Daten verarbeitet werden, ist nach § 25 TTDSG keine Einwilligung
+          Webanalyse-Dienst Umami ein, gehostet als Umami Cloud. Umami verzichtet vollständig auf
+          Cookies und jegliche Form von Fingerprinting, erhebt keine personenbezogenen Daten und
+          ermöglicht keine Nachverfolgung einzelner Personen über Websites hinweg. Erfasst werden
+          ausschließlich aggregierte, anonyme Kennzahlen wie aufgerufene Seiten, ungefähre Herkunft
+          (Land, auf Basis der IP-Adresse, die nicht gespeichert wird) und ausgelöste Ereignisse (z. B.
+          „PDF heruntergeladen"). Es werden keine individuellen Nutzungsprofile erstellt und keine
+          Daten mit Dritten geteilt. Eine Zuordnung zu Ihrer Person ist nicht möglich. Die
+          Datenverarbeitung erfolgt auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f
+          DSGVO) an einer bedarfsgerechten Gestaltung unserer Website. Weil keine Cookies gesetzt und
+          keine personenbezogenen Daten verarbeitet werden, ist nach § 25 TTDSG keine Einwilligung
           erforderlich — deshalb zeigen wir keinen Cookie-Banner an. Weitere Informationen:{" "}
           <a
-            href="https://plausible.io/data-policy"
+            href="https://umami.is/privacy"
             target="_blank"
             rel="noopener noreferrer"
             className="text-accent-500 underline"
           >
-            plausible.io/data-policy
+            umami.is/privacy
           </a>
           .
         </p>
         <p className="mt-3 text-ink-soft">
-          Neben Plausible setzen wir keine Marketing- oder Social-Media-Pixel und keine sonstigen
+          Neben Umami setzen wir keine Marketing- oder Social-Media-Pixel und keine sonstigen
           Analyse-Tools (z. B. Google Analytics) ein.
         </p>
       </section>

@@ -8,25 +8,25 @@ export function middleware(request: NextRequest) {
   // (eval-based module wrapping); it is never included in production builds.
   const devEval = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : "";
 
-  // Plausible (cookie-free analytics, see components/Analytics.tsx) is only
+  // Umami Cloud (cookie-free analytics, see components/Analytics.tsx) is only
   // allowlisted when it's actually configured, so the CSP stays maximally
-  // strict when NEXT_PUBLIC_PLAUSIBLE_DOMAIN is unset.
-  const plausibleEnabled = Boolean(process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN);
-  const plausibleScript = plausibleEnabled ? " https://plausible.io" : "";
-  const plausibleConnect = plausibleEnabled ? " https://plausible.io" : "";
+  // strict when NEXT_PUBLIC_UMAMI_WEBSITE_ID is unset.
+  const umamiEnabled = Boolean(process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID);
+  const umamiScript = umamiEnabled ? " https://cloud.umami.is" : "";
+  const umamiConnect = umamiEnabled ? " https://cloud.umami.is" : "";
 
   const csp = [
     "default-src 'self'",
     // 'wasm-unsafe-eval' is required by @react-pdf/renderer's WASM-based font
     // engine (WebAssembly.instantiate) — it permits WASM compilation only,
     // not arbitrary JS eval().
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'${devEval}${plausibleScript}`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'${devEval}${umamiScript}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob:",
     "font-src 'self' data:",
     // 'data:' here allows @react-pdf/renderer to fetch its own embedded
     // WASM binary (shipped as a data: URI in its bundle) — not third-party.
-    `connect-src 'self' data:${plausibleConnect}`,
+    `connect-src 'self' data:${umamiConnect}`,
     "frame-src 'self' blob:",
     "worker-src 'self' blob:",
     "object-src 'none'",
