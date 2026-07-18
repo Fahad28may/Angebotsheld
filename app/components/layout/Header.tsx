@@ -27,6 +27,12 @@ export function Header() {
             </Link>
           ))}
           <Link
+            href="/ratgeber"
+            className="text-sm font-medium text-ink-soft transition-colors hover:text-accent-500"
+          >
+            Ratgeber
+          </Link>
+          <Link
             href="/preise"
             className="text-sm font-medium text-ink-soft transition-colors hover:text-accent-500"
           >

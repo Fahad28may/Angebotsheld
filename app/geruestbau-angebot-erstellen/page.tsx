@@ -5,6 +5,8 @@ import { BenefitsSection } from "@/components/landing/BenefitsSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { TradeCrossLinks } from "@/components/landing/TradeCrossLinks";
+import { ExamplePdfSection } from "@/components/landing/ExamplePdfSection";
+import { MobileStickyCta } from "@/components/landing/MobileStickyCta";
 import { GeruestbauWizard } from "./GeruestbauWizard";
 
 const title = "Angebot erstellen für Gerüstbauer – kostenloser Generator";
@@ -96,10 +98,12 @@ export default function GeruestbauAngebotPage() {
         <GeruestbauWizard />
       </TradeHero>
 
+      <ExamplePdfSection trade="geruestbau" />
       <BenefitsSection title="Warum Gerüstbauer den AngebotsHeld-Generator nutzen" benefits={benefits} />
       <HowItWorksSection steps={steps} />
       <FaqSection items={faqItems} title="Häufige Fragen von Gerüstbaubetrieben" />
       <TradeCrossLinks current="geruestbau" />
+      <MobileStickyCta targetId="wizard" sessionStorageKey="angebotsheld:geruestbau" />
     </div>
   );
 }

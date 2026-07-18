@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/lib/siteConfig";
-import { Reveal } from "@/components/landing/Reveal";
 import { TrustBar } from "@/components/landing/TrustBar";
 import { TradeCards } from "@/components/landing/TradeCards";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+import { ExamplePdfShowcase } from "@/components/landing/ExamplePdfShowcase";
 import { FaqSection } from "@/components/landing/FaqSection";
 
 const title = "AngebotsHeld – Angebote für Maler, Fliesenleger & Gerüstbauer";
@@ -48,7 +48,7 @@ const faqItems = [
   {
     question: "Sind meine Daten sicher?",
     answer:
-      "Alle Berechnungen laufen in Ihrem Browser. Es werden keine Cookies gesetzt und kein Tracking eingesetzt. Details finden Sie auf unserer Datenschutz-Seite.",
+      "Alle Berechnungen laufen in Ihrem Browser – Ihre Angebotsdaten werden nie an unsere Server übertragen. Es werden keine Cookies gesetzt. Wir nutzen lediglich anonyme, cookie-freie Nutzungsstatistiken (Plausible), die keine Rückschlüsse auf einzelne Personen zulassen. Details finden Sie auf unserer Datenschutz-Seite.",
   },
 ];
 
@@ -56,35 +56,36 @@ export default function HomePage() {
   return (
     <div>
       <section className="border-b border-line bg-white">
+        {/* Not wrapped in Reveal — above-the-fold, and the h1 is the LCP
+            element on this page; a scroll-triggered fade only delays it. */}
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8 lg:py-28">
-          <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-wide text-accent-500">
-              Für Maler, Fliesenleger & Gerüstbauer
-            </p>
-            <h1 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl lg:text-6xl">
-              Angebote, die Ihre Kunden überzeugen. In 2 Minuten fertig.
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Material, Arbeitszeit und Preise automatisch berechnen und als professionelles PDF-Angebot
-              herunterladen – kostenlos, ohne Anmeldung, direkt im Browser.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="#trades"
-                className="inline-flex h-12 items-center justify-center rounded-md2 bg-accent-500 px-6 text-base font-semibold text-paper shadow-soft transition-colors hover:bg-accent-600"
-              >
-                Jetzt Angebot erstellen
-              </Link>
-              <Link href="/preise" className="text-sm font-semibold text-ink-soft hover:text-accent-500">
-                Preise ansehen →
-              </Link>
-            </div>
-          </Reveal>
+          <p className="text-sm font-semibold uppercase tracking-wide text-accent-500">
+            Für Maler, Fliesenleger & Gerüstbauer
+          </p>
+          <h1 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl lg:text-6xl">
+            Angebote, die Ihre Kunden überzeugen. In 2 Minuten fertig.
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+            Material, Arbeitszeit und Preise automatisch berechnen und als professionelles PDF-Angebot
+            herunterladen – kostenlos, ohne Anmeldung, direkt im Browser.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="#trades"
+              className="inline-flex h-12 items-center justify-center rounded-md2 bg-accent-500 px-6 text-base font-semibold text-paper shadow-soft transition-colors hover:bg-accent-600"
+            >
+              Jetzt Angebot erstellen
+            </Link>
+            <Link href="/preise" className="text-sm font-semibold text-ink-soft hover:text-accent-500">
+              Preise ansehen →
+            </Link>
+          </div>
         </div>
       </section>
 
       <TrustBar />
       <TradeCards />
+      <ExamplePdfShowcase />
       <HowItWorksSection steps={steps} />
       <FaqSection items={faqItems} title="Häufige Fragen" />
     </div>

@@ -1,4 +1,4 @@
-const items = ["Kostenlos nutzbar", "Keine Anmeldung", "Keine Cookies, kein Tracking", "In 2 Minuten fertig"];
+const items = ["Kostenlos nutzbar", "Keine Anmeldung", "Keine Cookies", "In 2 Minuten fertig"];
 
 export function TrustBar() {
   return (

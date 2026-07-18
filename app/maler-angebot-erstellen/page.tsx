@@ -5,6 +5,8 @@ import { BenefitsSection } from "@/components/landing/BenefitsSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { TradeCrossLinks } from "@/components/landing/TradeCrossLinks";
+import { ExamplePdfSection } from "@/components/landing/ExamplePdfSection";
+import { MobileStickyCta } from "@/components/landing/MobileStickyCta";
 import { MalerWizard } from "./MalerWizard";
 
 const title = "Angebot erstellen für Maler – kostenloser Generator";
@@ -96,10 +98,12 @@ export default function MalerAngebotPage() {
         <MalerWizard />
       </TradeHero>
 
+      <ExamplePdfSection trade="maler" />
       <BenefitsSection title="Warum Maler den AngebotsHeld-Generator nutzen" benefits={benefits} />
       <HowItWorksSection steps={steps} />
       <FaqSection items={faqItems} title="Häufige Fragen von Malerbetrieben" />
       <TradeCrossLinks current="maler" />
+      <MobileStickyCta targetId="wizard" sessionStorageKey="angebotsheld:maler" />
     </div>
   );
 }

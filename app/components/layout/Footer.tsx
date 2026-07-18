@@ -38,6 +38,16 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/ratgeber" className="text-sm text-ink-soft transition-colors hover:text-accent-500">
+                  Ratgeber
+                </Link>
+              </li>
+              <li>
+                <Link href="/vorlagen" className="text-sm text-ink-soft transition-colors hover:text-accent-500">
+                  Vorlagen
+                </Link>
+              </li>
+              <li>
                 <a
                   href={`mailto:${siteConfig.contactEmail}`}
                   className="text-sm text-ink-soft transition-colors hover:text-accent-500"
@@ -61,13 +71,26 @@ export function Footer() {
                   Datenschutz
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/nutzungsbedingungen"
+                  className="text-sm text-ink-soft transition-colors hover:text-accent-500"
+                >
+                  Nutzungsbedingungen
+                </Link>
+              </li>
+              <li>
+                <Link href="/widerruf" className="text-sm text-ink-soft transition-colors hover:text-accent-500">
+                  Widerruf
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-10 flex flex-col gap-2 border-t border-line pt-6 text-xs text-ink-faint sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {siteConfig.name}. Alle Rechte vorbehalten.</p>
-          <p>Keine Cookies, kein Tracking.</p>
+          <p>Keine Cookies.</p>
         </div>
       </div>
     </footer>

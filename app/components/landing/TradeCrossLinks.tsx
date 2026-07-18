@@ -2,6 +2,12 @@ import Link from "next/link";
 import { siteConfig, type TradeKey } from "@/lib/siteConfig";
 import { Reveal } from "./Reveal";
 
+const vorlagenSlugs: Record<TradeKey, string> = {
+  maler: "maler-angebotsvorlage",
+  fliesenleger: "fliesenleger-angebotsvorlage",
+  geruestbau: "geruestbau-angebotsvorlage",
+};
+
 export function TradeCrossLinks({ current }: { current: TradeKey }) {
   const others = Object.entries(siteConfig.trades).filter(([key]) => key !== current);
 
@@ -25,6 +31,13 @@ export function TradeCrossLinks({ current }: { current: TradeKey }) {
             </Link>
           ))}
         </div>
+        <p className="mt-6 text-sm text-ink-soft">
+          Lieber von Hand ausfüllen?{" "}
+          <Link href={`/vorlagen/${vorlagenSlugs[current]}`} className="text-accent-500 underline hover:text-accent-600">
+            Kostenlose {siteConfig.trades[current].label}-Angebotsvorlage
+          </Link>{" "}
+          herunterladen.
+        </p>
       </div>
     </section>
   );

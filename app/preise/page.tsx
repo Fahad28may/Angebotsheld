@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/lib/siteConfig";
 import { Reveal, RevealGroup, RevealItem } from "@/components/landing/Reveal";
 import { WaitlistForm } from "./WaitlistForm";
@@ -17,7 +18,7 @@ const freeFeatures = [
   "Automatische Material- und Preisberechnung",
   "Unbegrenzte Angebote pro Sitzung",
   "PDF-Download mit kleinem Hinweis-Footer",
-  "Keine Anmeldung, keine Cookies, kein Tracking",
+  "Keine Anmeldung, keine Cookies",
 ];
 
 const proFeatures = [
@@ -82,6 +83,13 @@ export default function PreisePage() {
             <div className="mt-8 border-t border-line pt-6">
               <p className="mb-3 text-sm font-medium text-ink">Jetzt informieren, wenn Pro startet:</p>
               <WaitlistForm />
+              <p className="mt-3 text-xs text-ink-faint">
+                Informationen zu Kündigung, Widerruf und Erstattung für Pro finden Sie unter{" "}
+                <Link href="/widerruf" className="underline hover:text-accent-500">
+                  Widerruf
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </RevealItem>

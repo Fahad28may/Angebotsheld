@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { useSessionStorageState } from "@/lib/hooks/useSessionStorageState";
+import { track } from "@/lib/analytics";
 import { createDefaultCompany, createDefaultCustomer, createDefaultMeta } from "@/lib/defaults";
 import {
   calculateGeruestLineItems,
@@ -12,9 +14,9 @@ import type { Step1Values, Step3Values } from "@/lib/schemas";
 import { WizardShell } from "@/components/wizard/WizardShell";
 import { SummaryPanel, MobileSummaryBar } from "@/components/wizard/SummaryPanel";
 import { Step1CompanyCustomer } from "@/components/wizard/steps/Step1CompanyCustomer";
-import { Step3LineItems } from "@/components/wizard/steps/Step3LineItems";
+import { Step3LineItems } from "@/components/wizard/steps/DynamicStep3LineItems";
 import { Step4Preview } from "@/components/wizard/steps/DynamicStep4Preview";
-import { Step2Geruestbau } from "./Step2Geruestbau";
+import { Step2Geruestbau } from "./DynamicStep2Geruestbau";
 
 const STORAGE_KEY = "angebotsheld:geruestbau";
 const STEPS = ["Kundendaten", "Projektdaten", "Preise", "Vorschau"];
@@ -52,9 +54,15 @@ export function GeruestbauWizard() {
     createInitialState()
   );
 
+  useEffect(() => {
+    track({ name: "Wizard Started", props: { trade: "geruestbau" } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const goTo = (step: number, direction: number) => setState((s) => ({ ...s, step, direction }));
 
   const handleStep1Next = (values: Step1Values) => {
+    track({ name: "Wizard Step Completed", props: { trade: "geruestbau", step: 1 } });
     setState((s) => ({
       ...s,
       company: values.company,
@@ -66,6 +74,7 @@ export function GeruestbauWizard() {
   };
 
   const handleStep2Next = (calcInput: GeruestCalculationInput) => {
+    track({ name: "Wizard Step Completed", props: { trade: "geruestbau", step: 2 } });
     setState((s) => {
       const autoItems = calculateGeruestLineItems(calcInput);
       return {
@@ -79,6 +88,7 @@ export function GeruestbauWizard() {
   };
 
   const handleStep3Next = (values: Step3Values) => {
+    track({ name: "Wizard Step Completed", props: { trade: "geruestbau", step: 3 } });
     setState((s) => ({
       ...s,
       lineItems: values.lineItems,
@@ -128,6 +138,7 @@ export function GeruestbauWizard() {
           <Step4Preview
             quote={quote}
             tradeLabel="Gerüstbau"
+            tradeKey="geruestbau"
             onBack={() => goTo(2, -1)}
             onReset={handleReset}
           />

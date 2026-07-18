@@ -1,13 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AnimatePresence, motion } from "framer-motion";
 import { step1Schema, legalForms, type Step1Values } from "@/lib/schemas";
 import { FieldError, FieldGroup, Hint, Label } from "@/components/ui/Field";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
+import { Checkbox } from "@/components/ui/Checkbox";
 import { Card } from "@/components/ui/Card";
 import { StepNav } from "@/components/wizard/StepNav";
+import { useCompanyProfile } from "@/lib/hooks/useCompanyProfile";
+import { createDefaultCompany, saveLastQuoteNumber, suggestNextQuoteNumber } from "@/lib/defaults";
 
 interface Step1Props {
   defaultValues: Step1Values;
@@ -18,14 +23,77 @@ export function Step1CompanyCustomer({ defaultValues, onNext }: Step1Props) {
   const {
     register,
     handleSubmit,
+    reset,
+    getValues,
     formState: { errors },
   } = useForm<Step1Values>({
     resolver: zodResolver(step1Schema),
     defaultValues,
   });
 
+  const { profile, loaded, saveProfile, clearProfile } = useCompanyProfile();
+  const [saveOptIn, setSaveOptIn] = useState(false);
+  const [showLoadedNotice, setShowLoadedNotice] = useState(false);
+
+  useEffect(() => {
+    // Only pre-fill on a genuinely fresh quote (no company name yet in this
+    // wizard session) — never overwrite data the user is already editing.
+    if (!loaded || !profile || getValues("company.companyName")) return;
+    reset({
+      ...getValues(),
+      company: profile,
+      meta: { ...getValues("meta"), quoteNumber: suggestNextQuoteNumber() },
+    });
+    setShowLoadedNotice(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, profile]);
+
+  const handleDeleteSavedData = () => {
+    clearProfile();
+    reset({ ...getValues(), company: createDefaultCompany() });
+    setShowLoadedNotice(false);
+    setSaveOptIn(false);
+  };
+
+  const handleFormSubmit = (values: Step1Values) => {
+    if (saveOptIn) {
+      saveProfile(values.company);
+      saveLastQuoteNumber(values.meta.quoteNumber);
+    }
+    onNext(values);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onNext)} noValidate>
+    <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
+      <AnimatePresence>
+        {showLoadedNotice ? (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="overflow-hidden"
+          >
+            <div className="mb-6 flex items-center justify-between gap-3 rounded-md2 border border-accent-100 bg-accent-50 px-4 py-3">
+              <p className="text-sm text-accent-700">
+                Gespeicherte Firmendaten geladen.{" "}
+                <button type="button" onClick={handleDeleteSavedData} className="underline hover:no-underline">
+                  Daten löschen
+                </button>
+              </p>
+              <button
+                type="button"
+                onClick={() => setShowLoadedNotice(false)}
+                aria-label="Hinweis schließen"
+                className="text-accent-500 hover:text-accent-700"
+              >
+                ×
+              </button>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
       <div className="space-y-6">
         <Card>
           <h2 className="font-serif text-xl text-ink">Ihre Firmendaten</h2>
@@ -135,6 +203,15 @@ export function Step1CompanyCustomer({ defaultValues, onNext }: Step1Props) {
               <Input id="vatId" placeholder="DE123456789" {...register("company.vatId")} />
               <Hint>Optional.</Hint>
             </FieldGroup>
+          </div>
+
+          <div className="mt-5">
+            <Checkbox
+              label="Firmendaten auf diesem Gerät speichern"
+              description="Damit sie beim nächsten Angebot automatisch vorausgefüllt sind. Nur auf diesem Gerät, wird nicht übertragen."
+              checked={saveOptIn}
+              onChange={(e) => setSaveOptIn(e.target.checked)}
+            />
           </div>
         </Card>
 

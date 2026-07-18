@@ -5,6 +5,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
+import { Analytics } from "@/components/Analytics";
 import { siteConfig } from "@/lib/siteConfig";
 
 const inter = Inter({
@@ -17,7 +18,6 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
   display: "swap",
-  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -56,6 +56,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="de" className={`${inter.variable} ${fraunces.variable}`}>
       <body>
+        <Analytics />
         <MotionProvider>
           <div className="flex min-h-screen flex-col">
             <Header />

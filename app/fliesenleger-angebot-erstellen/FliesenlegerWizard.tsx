@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { useSessionStorageState } from "@/lib/hooks/useSessionStorageState";
+import { track } from "@/lib/analytics";
 import { createDefaultCompany, createDefaultCustomer, createDefaultMeta } from "@/lib/defaults";
 import {
   calculateFliesenLineItems,
@@ -12,9 +14,9 @@ import type { Step1Values, Step3Values } from "@/lib/schemas";
 import { WizardShell } from "@/components/wizard/WizardShell";
 import { SummaryPanel, MobileSummaryBar } from "@/components/wizard/SummaryPanel";
 import { Step1CompanyCustomer } from "@/components/wizard/steps/Step1CompanyCustomer";
-import { Step3LineItems } from "@/components/wizard/steps/Step3LineItems";
+import { Step3LineItems } from "@/components/wizard/steps/DynamicStep3LineItems";
 import { Step4Preview } from "@/components/wizard/steps/DynamicStep4Preview";
-import { Step2Fliesenleger } from "./Step2Fliesenleger";
+import { Step2Fliesenleger } from "./DynamicStep2Fliesenleger";
 
 const STORAGE_KEY = "angebotsheld:fliesenleger";
 const STEPS = ["Kundendaten", "Projektdaten", "Preise", "Vorschau"];
@@ -52,9 +54,15 @@ export function FliesenlegerWizard() {
     createInitialState()
   );
 
+  useEffect(() => {
+    track({ name: "Wizard Started", props: { trade: "fliesenleger" } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const goTo = (step: number, direction: number) => setState((s) => ({ ...s, step, direction }));
 
   const handleStep1Next = (values: Step1Values) => {
+    track({ name: "Wizard Step Completed", props: { trade: "fliesenleger", step: 1 } });
     setState((s) => ({
       ...s,
       company: values.company,
@@ -66,6 +74,7 @@ export function FliesenlegerWizard() {
   };
 
   const handleStep2Next = (calcInput: FliesenCalculationInput) => {
+    track({ name: "Wizard Step Completed", props: { trade: "fliesenleger", step: 2 } });
     setState((s) => {
       const autoItems = calculateFliesenLineItems(calcInput);
       return {
@@ -79,6 +88,7 @@ export function FliesenlegerWizard() {
   };
 
   const handleStep3Next = (values: Step3Values) => {
+    track({ name: "Wizard Step Completed", props: { trade: "fliesenleger", step: 3 } });
     setState((s) => ({
       ...s,
       lineItems: values.lineItems,
@@ -128,6 +138,7 @@ export function FliesenlegerWizard() {
           <Step4Preview
             quote={quote}
             tradeLabel="Fliesenleger"
+            tradeKey="fliesenleger"
             onBack={() => goTo(2, -1)}
             onReset={handleReset}
           />

@@ -19,7 +19,7 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["@react-pdf/renderer"],
+  transpilePackages: ["@react-pdf/renderer", "next-mdx-remote", "@mdx-js/mdx", "@mdx-js/react"],
   async headers() {
     return [
       {

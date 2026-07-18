@@ -5,6 +5,8 @@ import { BenefitsSection } from "@/components/landing/BenefitsSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { TradeCrossLinks } from "@/components/landing/TradeCrossLinks";
+import { ExamplePdfSection } from "@/components/landing/ExamplePdfSection";
+import { MobileStickyCta } from "@/components/landing/MobileStickyCta";
 import { FliesenlegerWizard } from "./FliesenlegerWizard";
 
 const title = "Angebot erstellen für Fliesenleger – kostenloser Generator";
@@ -96,10 +98,12 @@ export default function FliesenlegerAngebotPage() {
         <FliesenlegerWizard />
       </TradeHero>
 
+      <ExamplePdfSection trade="fliesenleger" />
       <BenefitsSection title="Warum Fliesenleger den AngebotsHeld-Generator nutzen" benefits={benefits} />
       <HowItWorksSection steps={steps} />
       <FaqSection items={faqItems} title="Häufige Fragen von Fliesenlegerbetrieben" />
       <TradeCrossLinks current="fliesenleger" />
+      <MobileStickyCta targetId="wizard" sessionStorageKey="angebotsheld:fliesenleger" />
     </div>
   );
 }

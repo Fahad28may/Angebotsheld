@@ -4,6 +4,7 @@ import { siteConfig } from "@/lib/siteConfig";
 export const metadata: Metadata = {
   title: "Impressum",
   description: `Impressum und Anbieterkennzeichnung von ${siteConfig.name} gemäß § 5 TMG.`,
+  alternates: { canonical: `${siteConfig.url}/impressum` },
   robots: { index: true, follow: true },
 };
 

@@ -3,7 +3,8 @@ import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Datenschutzerklärung",
-  description: `Datenschutzerklärung von ${siteConfig.name}: keine Cookies, kein Tracking.`,
+  description: `Datenschutzerklärung von ${siteConfig.name}: keine Cookies, anonyme Nutzungsstatistiken.`,
+  alternates: { canonical: `${siteConfig.url}/datenschutz` },
   robots: { index: true, follow: true },
 };
 
@@ -13,11 +14,12 @@ export default function DatenschutzPage() {
       <h1 className="font-serif text-4xl text-ink">Datenschutzerklärung</h1>
 
       <div className="mt-6 rounded-md2 border border-accent-100 bg-accent-50 p-5">
-        <p className="font-semibold text-accent-700">Keine Cookies, kein Tracking.</p>
+        <p className="font-semibold text-accent-700">Keine Cookies.</p>
         <p className="mt-1 text-sm text-accent-700">
-          {siteConfig.name} verzichtet in der kostenlosen Version vollständig auf Tracking- oder
-          Marketing-Cookies. Die von Ihnen eingegebenen Angebotsdaten werden ausschließlich in Ihrem
-          Browser verarbeitet und nicht an unsere Server übertragen.
+          {siteConfig.name} verzichtet vollständig auf Cookies — auch für die anonymen
+          Nutzungsstatistiken in Abschnitt 4 unten wird kein einziges Cookie gesetzt. Die von Ihnen
+          eingegebenen Angebotsdaten werden ausschließlich in Ihrem Browser verarbeitet und nicht an
+          unsere Server übertragen.
         </p>
       </div>
 
@@ -45,6 +47,16 @@ export default function DatenschutzPage() {
           Daten temporär im sogenannten Session-Storage. Diese Daten werden automatisch gelöscht, sobald
           Sie den Browser-Tab schließen, und verlassen zu keinem Zeitpunkt Ihr Gerät.
         </p>
+        <p className="mt-3 text-ink-soft">
+          Optional können Sie über die Checkbox „Firmendaten auf diesem Gerät speichern" in Schritt 1
+          Ihre eigenen Firmendaten (Name, Rechtsform, Anschrift, Steuernummer, Kontaktdaten) dauerhaft
+          in Ihrem Browser hinterlegen (sogenannter Local Storage), damit sie beim nächsten Angebot
+          automatisch vorausgefüllt werden. Diese Speicherung erfolgt ausschließlich, wenn Sie die
+          Checkbox aktiv ankreuzen, bleibt ausschließlich auf Ihrem Gerät und wird zu keinem Zeitpunkt
+          an unsere Server übertragen. Sie können die gespeicherten Daten jederzeit über den Link
+          „Daten löschen" im entsprechenden Hinweis wieder entfernen, oder indem Sie den Local Storage
+          Ihres Browsers für diese Website leeren.
+        </p>
       </section>
 
       <section className="mt-8">
@@ -62,23 +74,53 @@ export default function DatenschutzPage() {
       </section>
 
       <section className="mt-8">
-        <h2 className="font-serif text-xl text-ink">4. Keine Cookies, keine Analyse- oder Marketing-Tools</h2>
+        <h2 className="font-serif text-xl text-ink">4. Anonyme Nutzungsstatistiken (Plausible)</h2>
+        {/* REVIEW: Bitte prüfen, ob mit dem konkret gewählten Plausible-Hosting (plausible.io Cloud
+            vs. selbst gehostet) noch ein Auftragsverarbeitungsvertrag (AVV) abzuschließen ist, und ob
+            die Formulierung zur berechtigten Interessen-Abwägung (Art. 6 Abs. 1 lit. f DSGVO) trägt. */}
         <p className="mt-3 text-ink-soft">
-          Wir setzen keine Analyse-Tools (z. B. Google Analytics), keine Marketing- oder Social-Media-Pixel
-          und keine Cookies ein, die eine Einwilligung nach § 25 TTDSG erfordern würden. Aus diesem Grund
-          zeigen wir Ihnen auch keinen Cookie-Banner an.
+          Um zu verstehen, welche Seiten und Funktionen genutzt werden, setzen wir den
+          Webanalyse-Dienst Plausible Analytics ein. Plausible verzichtet vollständig auf Cookies und
+          jegliche Form von Fingerprinting, erhebt keine personenbezogenen Daten und ermöglicht keine
+          Nachverfolgung einzelner Personen über Websites hinweg. Erfasst werden ausschließlich
+          aggregierte, anonyme Kennzahlen wie aufgerufene Seiten, ungefähre Herkunft (Land, auf Basis
+          der IP-Adresse, die nicht gespeichert wird) und ausgelöste Ereignisse (z. B. „PDF
+          heruntergeladen"). Eine Zuordnung zu Ihrer Person ist nicht möglich. Die Datenverarbeitung
+          erfolgt auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) an einer
+          bedarfsgerechten Gestaltung unserer Website. Weil keine Cookies gesetzt und keine
+          personenbezogenen Daten verarbeitet werden, ist nach § 25 TTDSG keine Einwilligung
+          erforderlich — deshalb zeigen wir keinen Cookie-Banner an. Weitere Informationen:{" "}
+          <a
+            href="https://plausible.io/data-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-500 underline"
+          >
+            plausible.io/data-policy
+          </a>
+          .
+        </p>
+        <p className="mt-3 text-ink-soft">
+          Neben Plausible setzen wir keine Marketing- oder Social-Media-Pixel und keine sonstigen
+          Analyse-Tools (z. B. Google Analytics) ein.
         </p>
       </section>
 
       <section className="mt-8">
         <h2 className="font-serif text-xl text-ink">5. Warteliste (Preise-Seite)</h2>
-        {/* REVIEW: Absatz nur relevant, solange die Warteliste aktiv ist; ggf. um Double-Opt-in / Versanddienstleister ergänzen. */}
+        {/* REVIEW: Bitte prüfen, ob mit Resend ein Auftragsverarbeitungsvertrag (AVV) abzuschließen ist
+            und ob der Serverstandort (Resend verarbeitet u. a. in den USA) einen Hinweis auf
+            Standardvertragsklauseln (SCC) nach Art. 44 ff. DSGVO erfordert. */}
         <p className="mt-3 text-ink-soft">
-          Wenn Sie sich auf unserer Preise-Seite freiwillig für die Warteliste zur Pro-Version eintragen,
-          verwenden wir Ihre E-Mail-Adresse ausschließlich, um Sie über die Verfügbarkeit zu informieren.
-          Rechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. [PLATZHALTER –
-          eingesetzten Versanddienstleister und Speicherort ergänzen, sobald die Warteliste technisch
-          angebunden ist.]
+          Wenn Sie sich auf unserer Preise-Seite oder nach dem PDF-Download freiwillig für die
+          Warteliste zur Pro-Version eintragen, verwenden wir Ihre E-Mail-Adresse ausschließlich, um
+          Sie über die Verfügbarkeit zu informieren. Die Verarbeitung erfolgt über unseren
+          E-Mail-Dienstleister Resend (Resend Inc.). Rechtsgrundlage ist Ihre Einwilligung gemäß Art. 6
+          Abs. 1 lit. a DSGVO. Sie können der Speicherung Ihrer E-Mail-Adresse jederzeit formlos über{" "}
+          <a href={`mailto:${siteConfig.contactEmail}`} className="text-accent-500 underline">
+            {siteConfig.contactEmail}
+          </a>{" "}
+          widersprechen; wir löschen den Eintrag dann umgehend.
         </p>
       </section>
 
