@@ -19,7 +19,7 @@ Work through the articles below **in order**. On each scheduled run: find the fi
 - Brief: Which costs belong in an hourly rate (Löhne, unproduktive Stunden, Betriebskosten, Gewinnaufschlag), step-by-step worked calculation from annual costs to €/hour, why underpricing is the most common mistake, brief FAQ.
 
 ### 3. Angebot schreiben als Gerüstbauer – mit Beispiel und Preisen
-- Status: PENDING
+- Status: PUBLISHED (2026-07-21, published automatically)
 - Slug: angebot-schreiben-geruestbauer
 - Target search: "angebot gerüstbau muster"
 - CTA: /geruestbau-angebot-erstellen
